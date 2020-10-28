@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Todo list</title>
+</head>
+<body>
+    <h1> Task manager</h1>
+
+    <input id="inp1" type="text" />
+    <button id="btn1">Add task</button>
+    <h2 id="txt1"></h2>
+   
+
+<script>
+    let inp1 = document.getElementById('inp1');
+    let btn1 = document.getElementById('btn1');
+    let txt1 = document.getElementById('txt1'); 
+ 
+    let task = [];
+
+
+    btn1.addEventListener('click', function(evt) {     
+         task.push("- " + inp1.value + "<br>");   
+        txt1.innerHTML = task.join(" ");
+
+        });
+     
+
+</script>
+
+  
+</body>
+</html>
