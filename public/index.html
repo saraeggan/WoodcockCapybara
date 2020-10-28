@@ -20,9 +20,10 @@
  
     let task = [];
 
+
     btn1.addEventListener('click', function(evt) {     
          task.push("- " + inp1.value + "<br>");   
-        txt1.innerHTML = task;
+        txt1.innerHTML = task.join(" ");
 
         });
      
