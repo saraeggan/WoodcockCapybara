@@ -10,22 +10,40 @@
 
     <input id="inp1" type="text" />
     <button id="btn1">Add task</button>
-    <h2 id="txt1"></h2>
+    <button id="btn2">Delete task</button>
+    <ul id="txt1"></ul>
    
 
 <script>
     let inp1 = document.getElementById('inp1');
     let btn1 = document.getElementById('btn1');
     let txt1 = document.getElementById('txt1'); 
+    let btn2 = document.getElementById('btn2');
+    
  
     let task = [];
 
 
     btn1.addEventListener('click', function(evt) {     
-         task.push("- " + inp1.value + "<br>");   
+         task.push( `<ul>
+            <li>${inp1.value}</li>
+            </ul>`);   
         txt1.innerHTML = task.join(" ");
 
+
+
         });
+
+    btn2.addEventListener('click', function(evt){
+        task.splice(0,1);
+        txt1.removeChild(txt1.childNodes[0]);
+        
+
+    });
+
+        console.log(task);
+
+        
      
 
 </script>
