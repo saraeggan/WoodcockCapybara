@@ -20,6 +20,7 @@
     let txt1 = document.getElementById('txt1'); 
     let btn2 = document.getElementById('btn2');
     
+    
  
     let task = [];
 
@@ -29,10 +30,8 @@
             <li>${inp1.value}</li>
             </ul>`);   
         txt1.innerHTML = task.join(" ");
-
-
-
         });
+        
 
     btn2.addEventListener('click', function(evt){
         task.splice(0,1);
