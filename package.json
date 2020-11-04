@@ -17,5 +17,8 @@
   "bugs": {
     "url": "https://github.com/EmilyThu/WoodcockCapybara/issues"
   },
-  "homepage": "https://github.com/EmilyThu/WoodcockCapybara#readme"
+  "homepage": "https://github.com/EmilyThu/WoodcockCapybara#readme",
+  "dependencies": {
+    "express": "^4.17.1"
+  }
 }
