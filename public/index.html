@@ -3,33 +3,40 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo list</title>
+    <title>Client</title>
 </head>
+<h1> Taskmanager</h1>
 <body>
-    <h1> Task manager</h1>
+    
+   <div class="container">
+       <input id="inpTask" type="text" />
+       <button id="btnAddTask">Add task</button>
+       <div class="taskManager" id="taskContainer">
 
-    <input id="inp1" type="text" />
-    <button id="btn1">Add task</button>
-    <h2 id="txt1"></h2>
-   
+       </div>
+   </div> 
 
 <script>
-    let inp1 = document.getElementById('inp1');
-    let btn1 = document.getElementById('btn1');
-    let txt1 = document.getElementById('txt1'); 
+   
+    let inpTask = document.getElementById('inpTask');
+    let btnAddTask = document.getElementById('btnAddTask');
+    let taskContainer = document.getElementById('taskContainer'); 
+     
  
-    let task = [];
 
+    btnAddTask.addEventListener('click', function(evt) { 
+        let taskListItem = document.createElement("li");     
+         taskListItem.innerHTML = inpTask.value; 
+         taskContainer.appendChild(taskListItem);
+         inpTask.value = " ";
 
-    btn1.addEventListener('click', function(evt) {     
-         task.push("- " + inp1.value + "<br>");   
-        txt1.innerHTML = task.join(" ");
+         taskListItem.addEventListener('click', function(evt){
+             taskListItem.style.textDecoration = "line-through";
+
+         });
 
         });
-     
 
 </script>
-
-  
 </body>
 </html>
