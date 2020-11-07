@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Client</title>
+    <title>Taskmanager</title>
 </head>
 <h1> Taskmanager</h1>
 <body>
@@ -32,7 +32,10 @@
 
          taskListItem.addEventListener('click', function(evt){
              taskListItem.style.textDecoration = "line-through";
-
+             
+             taskListItem.addEventListener('dblclick', function(evt){
+             taskListItem.style.textDecoration = "none";
+         });
          });
 
         });
