@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create account</title>
+</head>
+<body>
+
+    <h1>Create account</h1>
+
+
+    <label for ="username">Username: </label>
+    <input type="text" id="username" minlength="8">
+    
+    <label for ="password">Password: </label>
+    <input type="password" id="password" minlength="8">
+    
+    <button id = "createUser" type = "submit">Create account</button>
+
+
+<script>
+
+    const usernameInp = document.getElementById("username");
+    const pswInp = document.getElementById("password");
+    const createUser = document.getElementById("createUser");
+
+    createUser.onclick = function (evt){
+
+        let body = {
+            username: usernameInp.value,
+            password: pswInp.value
+        }
+
+        let cfg = {
+            method: "POST",
+            headers:{
+                "content-type":"application/json"
+            },
+            body: JSON.stringify(body)
+        }
+
+        
+        fetch("/user", cfg).then(resp => {
+        
+            console.log(resp.status); 
+        })
+
+    }
+
+
+</script>
+
+
+ 
+</body>
+</html>
+
