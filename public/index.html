@@ -11,7 +11,7 @@
     <input id="inp1" type="text" />
     <button id="btn1">Add task</button>
     <button id="btn2">Delete task</button>
-    <ul id="txt1"></ul>
+    <ul id="txt1"> </ul>
    
 
 <script>
@@ -20,30 +20,30 @@
     let txt1 = document.getElementById('txt1'); 
     let btn2 = document.getElementById('btn2');
     
+    
  
     let task = [];
 
 
-    btn1.addEventListener('click', function(evt) {     
+    btn1.addEventListener('click', function(evt) {    
+
          task.push( `<ul>
-            <li>${inp1.value}</li>
+            <li>${inp1.value} </li> 
             </ul>`);   
         txt1.innerHTML = task.join(" ");
 
-
-
         });
 
+       
     btn2.addEventListener('click', function(evt){
+
         task.splice(0,1);
         txt1.removeChild(txt1.childNodes[0]);
         //dette er en kommentar heihei
-        
-        
 
     });
 
-        console.log(task);
+    console.log(task);
 
         
      
