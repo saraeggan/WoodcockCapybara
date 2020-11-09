@@ -13,6 +13,7 @@
        <button id="btnAddTask">Add task</button>
        <div class="taskManager" id="taskContainer">
 
+
        </div>
    </div> 
 
@@ -22,6 +23,9 @@
     let btnAddTask = document.getElementById('btnAddTask');
     let taskContainer = document.getElementById('taskContainer'); 
      
+    
+    
+
  
 
     btnAddTask.addEventListener('click', function(evt) { 
@@ -29,6 +33,7 @@
          taskListItem.innerHTML = inpTask.value; 
          taskContainer.appendChild(taskListItem);
          inpTask.value = " ";
+
 
          taskListItem.addEventListener('click', function(evt){
              taskListItem.style.textDecoration = "line-through";
@@ -39,6 +44,9 @@
          });
 
     });
+
+     
+
 
 </script>
 </body>
