@@ -3,53 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Todo list</title>
+    <title>Taskmanager</title>
 </head>
+<h1> Taskmanager</h1>
 <body>
-    <h1> Task manager</h1>
+    
+   <div class="container">
+       <input id="inpTask" type="text" />
+       <button id="btnAddTask">Add task</button>
+       <div class="taskManager" id="taskContainer">
 
-    <input id="inp1" type="text" />
-    <button id="btn1">Add task</button>
-    <button id="btn2">Delete task</button>
-    <ul id="txt1"> </ul>
-   
+
+       </div>
+   </div> 
 
 <script>
-    let inp1 = document.getElementById('inp1');
-    let btn1 = document.getElementById('btn1');
-    let txt1 = document.getElementById('txt1'); 
-    let btn2 = document.getElementById('btn2');
+   
+    let inpTask = document.getElementById('inpTask');
+    let btnAddTask = document.getElementById('btnAddTask');
+    let taskContainer = document.getElementById('taskContainer'); 
+     
     
     
+
  
-    let task = [];
+
+    btnAddTask.addEventListener('click', function(evt) { 
+        let taskListItem = document.createElement("li");     
+         taskListItem.innerHTML = inpTask.value; 
+         taskContainer.appendChild(taskListItem);
+         inpTask.value = " ";
 
 
-    btn1.addEventListener('click', function(evt) {    
-
-         task.push( `<ul>
-            <li>${inp1.value} </li> 
-            </ul>`);   
-        txt1.innerHTML = task.join(" ");
-
-    });
-        
-
-       
-    btn2.addEventListener('click', function(evt){
-
-        task.splice(0,1);
-        txt1.removeChild(txt1.childNodes[0]);
+         taskListItem.addEventListener('click', function(evt){
+             taskListItem.style.textDecoration = "line-through";
+             
+             taskListItem.addEventListener('dblclick', function(evt){
+             taskListItem.style.textDecoration = "none";
+         });
+         });
 
     });
 
-    console.log(task);
-
-        
      
 
-</script>
 
-  
+</script>
 </body>
 </html>
