@@ -5,7 +5,7 @@ const app = express();
 
 
 app.get('/', (rep,res) => {
-    res.sendFile(path.join(__dirname, 'public', 'create_user.html'));
+    res.sendFile(path.join(__dirname, 'public', 'createUser.html'));
 });
 
 app.post('/user',function (req, res) {
