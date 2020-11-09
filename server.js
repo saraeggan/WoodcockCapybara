@@ -6,7 +6,7 @@ const path = require('path');
 const bodyParser = require('body-parser');
 const app = express(); 
 
-
+app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.post('/user',function (req, res) {
