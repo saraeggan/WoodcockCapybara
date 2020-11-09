@@ -29,9 +29,14 @@
  
 
     btnAddTask.addEventListener('click', function(evt) { 
-        let taskListItem = document.createElement("li");     
-         taskListItem.innerHTML = inpTask.value; 
-         taskContainer.appendChild(taskListItem);
+        let taskListItem = document.createElement("li"); 
+        taskListItem.innerHTML = inpTask.value;
+        if(inpTask.value === ""){
+            alert("You must write something")
+        }else{ 
+        taskContainer.appendChild(taskListItem);
+        }
+        
          inpTask.value = " ";
 
 
