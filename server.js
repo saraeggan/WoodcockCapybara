@@ -11,10 +11,8 @@ app.use(express.static('public'));
 
 app.post('/user',function (req, res) {
     
-    
     res.status(200).end();
     console.log(req.body);
-
 });
 
 const PORT = process.env.PORT || 8080; 
