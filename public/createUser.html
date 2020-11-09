@@ -19,13 +19,15 @@
     <button id = "createUser" type = "submit">Create account</button>
 
 
+
 <script>
-    //Hellooo
+    
     const usernameInp = document.getElementById("username");
     const pswInp = document.getElementById("password");
     const createUser = document.getElementById("createUser");
 
     createUser.onclick = function (evt){
+
 
         let body = {
             username: usernameInp.value,
@@ -45,6 +47,8 @@
         
             console.log(response.status); 
         });
+
+
 
 
     }
