@@ -31,21 +31,23 @@
     btnAddTask.addEventListener('click', function(evt) { 
         let taskListItem = document.createElement("li"); 
         taskListItem.innerHTML = inpTask.value;
+        console.log(inpTask.value);
         if(inpTask.value === ""){
             alert("You must write something")
         }else{ 
         taskContainer.appendChild(taskListItem);
         }
         
-         inpTask.value = " ";
+         inpTask.value = "";
 
 
          taskListItem.addEventListener('click', function(evt){
              taskListItem.style.textDecoration = "line-through";
              
-             taskListItem.addEventListener('dblclick', function(evt){
-             taskListItem.style.textDecoration = "none";
+             
          });
+         taskListItem.addEventListener('dblclick', function(evt){
+             taskListItem.style.textDecoration = "none";
          });
 
     });
