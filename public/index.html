@@ -32,12 +32,21 @@
         let taskListItem = document.createElement("li"); 
         taskListItem.innerHTML = inpTask.value;
         console.log(inpTask.value);
+
+        //ikke lage liste element viss det ikke er tekst i input
         if(inpTask.value === ""){
             alert("You must write something")
         }else{ 
         taskContainer.appendChild(taskListItem);
         }
-        
+
+        //Lage en søppelknapp
+        const deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "Delete";
+        deleteButton.classList.add("dltBtn");
+        taskListItem.appendChild(deleteButton);
+
+        //Fjerner input verdi
          inpTask.value = "";
 
 
@@ -51,6 +60,8 @@
          });
 
     });
+
+    //Delete button remove element
 
      
 
