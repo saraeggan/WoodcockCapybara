@@ -4,6 +4,7 @@ const app = express();
 
 //const users = require('./modules/user');
 
+
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
@@ -15,6 +16,14 @@ app.post('/user',function (req, res) {
     console.log(req.body);
 
 });
+
+app.post('/frontpage', function (req, res){
+
+    
+
+});
+
+
 
 const PORT = process.env.PORT || 8080; 
 

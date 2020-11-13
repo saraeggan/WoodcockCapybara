@@ -29,16 +29,31 @@
 
         btnLogin.addEventListener('click', function (evt){
             
+            //location.href = "loginUser.html";
+            
 
 
         });
 
         btnCreate.addEventListener('click', function (evt){
 
-
+            location.href = "createUser.html";
 
         });
 
+    
+        let data = {btnCreate, btnLogin};
+
+        let cfg = {
+            method: "POST",
+            headers:{
+                "content-type":"application/json"
+            },
+            body: JSON.stringify(data)
+        }
+
+
+        fetch('/frontpage', cfg);
 
 
 
