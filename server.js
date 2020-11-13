@@ -10,7 +10,7 @@ app.use(express.static('public'));
 
 app.post('/frontpage', function (req, res){
 
-
+  
 });
 
 
