@@ -1,6 +1,3 @@
-// in terminal, write npm init -y to make a json package 
-// install nodemon to update the server automatically (optional)
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const app = express(); 
