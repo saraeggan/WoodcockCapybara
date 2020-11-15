@@ -9,7 +9,7 @@ app.use(bodyParser.json());
 app.use(express.static('public'));
 
 app.post('/frontpage', function (req, res){
-
+  
   
 });
 
