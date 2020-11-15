@@ -16,11 +16,51 @@
     <label for ="password">Password: </label>
     <input type="password" id="pswLogin" minlength="8">
     
-    <button id = "LogIn" type = "submit">LogIn</button>
+    <button id = "btnLogin" type = "submit">LogIn</button>
 
     <p id = "outtext"></p>
 
 
     
 </body>
+
+<script>
+
+    let userLogin = document.getElementById("userLogin");
+    let pswLogin = document.getElementById("pswLogin");
+    let btnLogin = document.getElementById("btnLogin");
+
+    let credentials = null;
+
+    btnLogin.addEventListener('click', function (evt) {
+
+     let username = userLogin.value
+     let password = pswLogin.value
+    
+
+     credentials = "Basic " + window.btoa (`${username}:${password}`)
+
+    let cfg = {
+        method: "POST",
+        headers:{
+            "content-type":"application/json",
+            "authorization": credentials
+        }
+    }
+
+
+        fetch("/user", cfg).then(response => {
+
+        console.log(response.status);
+         
+        });
+
+
+
+}); 
+
+
+
+
+</script>
 </html>

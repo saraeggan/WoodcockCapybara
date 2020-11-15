@@ -1,21 +1,33 @@
-class user {
+// const db = require('./datahandler)
+
+//const crypto = require('crypto')
+//const secret = process.env.hashSecret // require(../localenv).hashSecret
+/*
+class User {
     constructor(username, password){
         this.username = username;
-        this.password = password;
+        this.password = crypto.createHmac('sha256', secret)
+                        .update(password)
+                        .digest('hex');
+        this.valid = false; 
     }
 
-    /*async create(){
+
+    
+ 
+    async create(){
         try{
-            await database.insert('user', this.username, this.password)
+            await database.insertUser(this.username, this.password)
         } catch (err){
             console.error(err)
         }
-    }*/
+    }
     
 
 }
+*/
 
-//module.exports = user
+//module.exports = User
 
 
 
