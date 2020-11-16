@@ -53,11 +53,12 @@
          });
          taskListItem.addEventListener('dblclick', function(evt){
              taskListItem.style.textDecoration = "none";
-         });
+         
+            });
 
          //eventlistner for remove button
 
-    deleteButton.addEventListener('click', function(evt) {
+        deleteButton.addEventListener('click', function(evt) {
         taskContainer.removeChild(taskListItem);
     });
 
