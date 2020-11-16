@@ -3,51 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taskmanager</title>
+    <title>WoodcockCapybara taskmanager</title>
 </head>
-<h1> Taskmanager</h1>
 <body>
+
+    <h1>WELCOME TO WOODCOCKCAPYBARA TASK MANAGER</h1>
+
+    <p>
+        Is your life a mess? Do you need structure in your life? <br> 
+        WELL then you need WoodcockCapybara task manager! <br>
+        It will make your life simply deligthful!
+    </p>
+
+
+    <label for="login">LogIn</label>
+    <button id="btnLogin" class="buttonStyle">LogIn</button>
+
+    <label for="createuser">Don't have an account? Sign up here!</label>
+    <button id="btnCreate" class="buttonStyle">Sign up</button>
+
+
+    <script>
+        
+        let btnLogin = document.getElementById('btnLogin');
+        let btnCreate = document.getElementById('btnCreate'); 
+
+        btnLogin.addEventListener('click', function (evt){
+            
+            location.href = "loginUser.html";
+            
     
-   <div class="container">
-       <input id="inpTask" type="text" />
-       <button id="btnAddTask">Add task</button>
-       <div class="taskManager" id="taskContainer">
-
-
-       </div>
-   </div> 
-
-<script>
-   
-    let inpTask = document.getElementById('inpTask');
-    let btnAddTask = document.getElementById('btnAddTask');
-    let taskContainer = document.getElementById('taskContainer'); 
-     
+        });
+    
+        btnCreate.addEventListener('click', function (evt){
+    
+            location.href = "createUser.html";
+    
+        });
     
     
+        let data = {btnCreate, btnLogin};
 
- 
-
-    btnAddTask.addEventListener('click', function(evt) { 
-        let taskListItem = document.createElement("li");     
-         taskListItem.innerHTML = inpTask.value; 
-         taskContainer.appendChild(taskListItem);
-         inpTask.value = " ";
-
-
-         taskListItem.addEventListener('click', function(evt){
-             taskListItem.style.textDecoration = "line-through";
-             
-             taskListItem.addEventListener('dblclick', function(evt){
-             taskListItem.style.textDecoration = "none";
-         });
-         });
-
-    });
-
-     
+        let cfg = {
+            method: "POST",
+            headers:{
+                "content-type":"application/json"
+            },
+            body: JSON.stringify(data)
+        }
 
 
-</script>
+        fetch('/frontpage', cfg);
+
+
+
+
+    </script>
+
+
+
+    
 </body>
 </html>

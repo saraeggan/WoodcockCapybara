@@ -18,14 +18,17 @@
     
     <button id = "createUser" type = "submit">Create account</button>
 
+    <p id = "outtext"></p>
 
 <script>
-
+    
     const usernameInp = document.getElementById("username");
     const pswInp = document.getElementById("password");
     const createUser = document.getElementById("createUser");
 
-    createUser.onclick = function (evt){
+    
+    createUser.addEventListener('click', function (evt) {
+
 
         let body = {
             username: usernameInp.value,
@@ -47,7 +50,14 @@
         });
 
 
-    }
+
+        if(usernameInp.value.length < 8 && pswInp.value.length){
+            alert("You need at least 8 characters"); 
+            //return
+        }
+
+
+    }); 
 
 
 </script>
