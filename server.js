@@ -1,4 +1,4 @@
-// DETTE ER EN KOMMENTARTTTTRR
+
 
 const express = require('express');
 const bodyParser = require('body-parser');
