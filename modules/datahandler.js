@@ -18,7 +18,7 @@ class DataHandler {
         let results = null;
         try {
             await client.connect();
-            results = await client.query('INSERT INTO'); //hvor det står sql code
+            results = await client.query('INSERT INTO "public"."User"("username", "password") VALUES($1, $2) RETURNING *;', [username, password]); 
             results = results.rows[0].message;
             client.end();
         } catch (err){
@@ -35,7 +35,7 @@ class DataHandler {
         let results = null; 
         try{
             await client.connect(); 
-            results = await client.query('INSERT'); 
+            results = await client.query('INSERT INTO "public"."$1"("username", "password") VALUES($2, $3) RETURNING *;', params); 
             results = results.rows[0].message;
             client.end();
         }catch (err) {

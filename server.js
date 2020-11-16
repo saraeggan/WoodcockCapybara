@@ -18,7 +18,7 @@ app.post('/user', async function (req, res) {
     
     const newuser = new user(req.body.username, req.body.password);
     await newuser.create();
-    res.status(200).json(newUser).end();
+    res.status(200).json(newuser).end();
     //console.log(req.body);
 
 });
