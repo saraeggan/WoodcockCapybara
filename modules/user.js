@@ -1,7 +1,7 @@
 // const db = require('./datahandler)
 
 //const crypto = require('crypto')
-//const secret = process.env.hashSecret // require(../localenv).hashSecret
+//const secret = process.env.hashSecret || require(../localenv).hashSecret
 /*
 class User {
     constructor(username, password){
