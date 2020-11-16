@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Taskmanager</title>
+</head>
+<h1> Taskmanager</h1>
+<body>
+    
+   <div class="container">
+       <input id="inpTask" type="text" />
+       <button id="btnAddTask">Add task</button>
+       <div class="taskManager" id="taskContainer">
+
+
+       </div>
+   </div> 
+
+<script>
+   
+    let inpTask = document.getElementById('inpTask');
+    let btnAddTask = document.getElementById('btnAddTask');
+    let taskContainer = document.getElementById('taskContainer'); 
+     
+
+    btnAddTask.addEventListener('click', function(evt) { 
+        let taskListItem = document.createElement("li"); 
+        taskListItem.innerHTML = inpTask.value;
+        console.log(inpTask.value);
+
+        //ikke lage liste element viss det ikke er tekst i input
+        if(inpTask.value === ""){
+            alert("You must write something")
+        }else{ 
+        taskContainer.appendChild(taskListItem);
+        }
+
+        //Lage en søppelknapp
+        let deleteButton = document.createElement("button");
+        deleteButton.innerHTML = "Delete";
+        deleteButton.classList.add("dltBtn");
+        taskListItem.appendChild(deleteButton);
+
+        //Fjerner input verdi
+         inpTask.value = "";
+
+
+         taskListItem.addEventListener('click', function(evt){
+             taskListItem.style.textDecoration = "line-through";
+             
+             
+         });
+         taskListItem.addEventListener('dblclick', function(evt){
+             taskListItem.style.textDecoration = "none";
+         
+            });
+
+         //eventlistner for remove button
+
+        deleteButton.addEventListener('click', function(evt) {
+        taskContainer.removeChild(taskListItem);
+    });
+
+    });
+
+
+     
+
+
+</script>
+</body>
+</html>

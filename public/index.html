@@ -3,71 +3,65 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Taskmanager</title>
+    <title>WoodcockCapybara taskmanager</title>
 </head>
-<h1> Taskmanager</h1>
 <body>
+
+    <h1>WELCOME TO WOODCOCKCAPYBARA TASK MANAGER</h1>
+
+    <p>
+        Is your life a mess? Do you need structure in your life? <br> 
+        WELL then you need WoodcockCapybara task manager! <br>
+        It will make your life simply deligthful!
+    </p>
+
+
+    <label for="login">LogIn</label>
+    <button id="btnLogin" class="buttonStyle">LogIn</button>
+
+    <label for="createuser">Don't have an account? Sign up here!</label>
+    <button id="btnCreate" class="buttonStyle">Sign up</button>
+
+
+    <script>
+        
+        let btnLogin = document.getElementById('btnLogin');
+        let btnCreate = document.getElementById('btnCreate'); 
+
+        btnLogin.addEventListener('click', function (evt){
+            
+            location.href = "loginUser.html";
+            
     
-   <div class="container">
-       <input id="inpTask" type="text" />
-       <button id="btnAddTask">Add task</button>
-       <div class="taskManager" id="taskContainer">
+        });
+    
+        btnCreate.addEventListener('click', function (evt){
+    
+            location.href = "createUser.html";
+    
+        });
+    
+    
+        let data = {btnCreate, btnLogin};
 
-
-       </div>
-   </div> 
-
-<script>
-   
-    let inpTask = document.getElementById('inpTask');
-    let btnAddTask = document.getElementById('btnAddTask');
-    let taskContainer = document.getElementById('taskContainer'); 
-     
-
-    btnAddTask.addEventListener('click', function(evt) { 
-        let taskListItem = document.createElement("li"); 
-        taskListItem.innerHTML = inpTask.value;
-        console.log(inpTask.value);
-
-        //ikke lage liste element viss det ikke er tekst i input
-        if(inpTask.value === ""){
-            alert("You must write something")
-        }else{ 
-        taskContainer.appendChild(taskListItem);
+        let cfg = {
+            method: "POST",
+            headers:{
+                "content-type":"application/json"
+            },
+            body: JSON.stringify(data)
         }
 
-        //Lage en søppelknapp
-        let deleteButton = document.createElement("button");
-        deleteButton.innerHTML = "Delete";
-        deleteButton.classList.add("dltBtn");
-        taskListItem.appendChild(deleteButton);
 
-        //Fjerner input verdi
-         inpTask.value = "";
+        fetch('/frontpage', cfg);
 
 
-         taskListItem.addEventListener('click', function(evt){
-             taskListItem.style.textDecoration = "line-through";
-             
-             
-         });
-         taskListItem.addEventListener('dblclick', function(evt){
-             taskListItem.style.textDecoration = "none";
-         
-            });
-
-         //eventlistner for remove button
-
-        deleteButton.addEventListener('click', function(evt) {
-        taskContainer.removeChild(taskListItem);
-    });
-
-    });
 
 
-     
+    </script>
 
 
-</script>
+
+    
 </body>
 </html>
