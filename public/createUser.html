@@ -11,7 +11,7 @@
 
 
     <label for ="username">Username: </label>
-    <input type="text" id="username" minlength="8">
+    <input type="text" id="username" minlength="4">
     
     <label for ="password">Password: </label>
     <input type="password" id="password" minlength="8">
@@ -51,7 +51,7 @@
 
 
 
-        if(usernameInp.value.length < 8 && pswInp.value.length){
+        if(usernameInp.value.length < 4 && pswInp.value.length < 8){
             alert("You need at least 8 characters"); 
             //return
         }
