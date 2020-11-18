@@ -13,7 +13,8 @@ app.use(bodyParser.json());
 app.use(express.static('public')); 
 app.use("/secure", secureEndpoints); 
 
-app.post('/frontpage', function (req, res){
+app.post('/login', function (req, res){
+  res.status(200).end();
   
   
 });
