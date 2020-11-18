@@ -1,2 +1,2 @@
 # WoodcockCapybara
-Semester prosjekt MM-200
+Semesterprosjekt MM-200
