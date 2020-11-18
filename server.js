@@ -1,13 +1,17 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+
+const {
+    Router
+  } = require('express');
+const secureEndpoints = require("./modules/secureEndpoints"); 
+const user = require('./modules/user');
 const app = express(); 
 
-const user = require('./modules/user');
-
-
 app.use(bodyParser.json());
-app.use(express.static('public'));
+app.use(express.static('public')); 
+app.use("/secure", secureEndpoints); 
 
 app.post('/frontpage', function (req, res){
   
