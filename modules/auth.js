@@ -22,4 +22,4 @@ function authenticate(username, password) {
     return null;
 }
 
-module.export = authenticator;
+module.exports = authenticator;
