@@ -16,7 +16,7 @@
     <label for ="password">Password: </label>
     <input type="password" id="password" minlength="8">
     
-    <button id = "createUser" type = "submit">Create account</button>
+    <button id = "createUser">Create account</button>
 
     <p id = "outtext"></p>
 
@@ -27,7 +27,12 @@
     const createUser = document.getElementById("createUser");
 
     
-    createUser.addEventListener('click', function (evt) {
+    createUser.addEventListener('click', async function (evt) {
+
+       // if(usernameInp.value.length < 4 && pswInp.value.length < 8){
+          //  alert("You need at least 8 characters"); 
+            //return
+       // }
 
 
         let body = {
@@ -44,17 +49,18 @@
         }
 
         
-        fetch("/user", cfg).then(response => {
+       /* fetch("/user", cfg).then(response => {
         
-            console.log(response.status); 
-        });
+            return response.json(); 
 
 
+        }).then(data => {
+            console.log(data); 
+        });*/
 
-        if(usernameInp.value.length < 4 && pswInp.value.length < 8){
-            alert("You need at least 8 characters"); 
-            //return
-        }
+        let response = await fetch("/user", cfg); 
+        let data = await response.json(); 
+        console.log(data); 
 
 
     }); 
