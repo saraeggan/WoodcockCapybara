@@ -11,6 +11,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+
 // --
 
 const authenticator = async (req, res, next) => {
@@ -58,6 +59,7 @@ async function authenticate(username, password) {
 app.post('/login', authenticator, async function (req, res){
   
   
+
   if(req.login) {
     let token = generateToken({username: req.username});
      
@@ -68,6 +70,12 @@ app.post('/login', authenticator, async function (req, res){
     res.status(403).end();
   }
   
+
+
+app.post('/frontpage', function (req, res){
+
+
+
 });
 
 
