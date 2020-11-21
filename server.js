@@ -71,7 +71,7 @@ app.post('/login', authenticator, async function (req, res){
   }
   
 
-
+});
 app.post('/frontpage', function (req, res){
 
 
