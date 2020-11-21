@@ -11,10 +11,10 @@
 
 
     <label for ="username">Username: </label>
-    <input type="text" id="username" minlength="4">
+    <input type="text" id="username">
     
     <label for ="password">Password: </label>
-    <input type="password" id="password" minlength="8">
+    <input type="password" id="password">
     
     <button id = "createUser">Create account</button>
 
@@ -25,9 +25,11 @@
     const usernameInp = document.getElementById("username");
     const pswInp = document.getElementById("password");
     const createUser = document.getElementById("createUser");
+    const outtext = document.getElementById("outtext");
 
     
     createUser.addEventListener('click', async function (evt) {
+        outtext.innerHTML=""; 
 
        // if(usernameInp.value.length < 4 && pswInp.value.length < 8){
           //  alert("You need at least 8 characters"); 
@@ -60,7 +62,13 @@
 
         let response = await fetch("/user", cfg); 
         let data = await response.json(); 
-        console.log(data); 
+
+        if (data === "success!"){
+            location.href="loginUser.html"; 
+        }else{
+            outtext.innerHTML = "This user already exists"; 
+        }
+        
 
 
     }); 

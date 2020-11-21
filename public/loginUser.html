@@ -11,12 +11,12 @@
 
 
     <label for ="username">Username: </label>
-    <input type="text" id="userLogin" minlength="8">
+    <input type="text" id="userLogin">
     
     <label for ="password">Password: </label>
-    <input type="password" id="pswLogin" minlength="8">
+    <input type="password" id="pswLogin">
     
-    <button id = "btnLogin" type = "submit">LogIn</button>
+    <button id = "btnLogin">LogIn</button>
 
     <p id = "outtext"></p>
 
@@ -29,10 +29,11 @@
     let userLogin = document.getElementById("userLogin");
     let pswLogin = document.getElementById("pswLogin");
     let btnLogin = document.getElementById("btnLogin");
+    let outtext = document.getElementById("outtext");
 
     let credentials = null;
 
-    btnLogin.addEventListener('click', function (evt) {
+    btnLogin.addEventListener('click', async function (evt) {
 
      let username = userLogin.value
      let password = pswLogin.value
@@ -49,12 +50,14 @@
     }
 
 
-        fetch("/login", cfg).then(response => {
+    let response = await fetch("/login", cfg); 
+    console.log(response.status);
 
-        console.log(response.status);
-         
-        });
-
+    if(response.status === 200){
+        location.href = "taskmanager.html";
+    } else {
+        outtext.innerHTML = "You must try again!";
+    }
 
 
 }); 

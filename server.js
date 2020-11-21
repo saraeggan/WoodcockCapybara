@@ -13,7 +13,7 @@ app.use(express.static('public'));
 
 // --
 
-const authenticator = (req, res, next) => {
+const authenticator = async (req, res, next) => {
   if (!req.headers.authorization || req.headers.authorization.indexOf('Basic') === -1) {
       return res.append("WWW-Authenticate", 'Basic realm="User Visible Realm", charset="UTF-8"').status(401).end()
   }
@@ -21,24 +21,56 @@ const authenticator = (req, res, next) => {
   const credentials = req.headers.authorization.split(' ')[1]; 
   const [username, password] = Buffer.from(credentials, 'base64').toString('UTF-8').split(":");
 
-  const user = authenticate(username, password)
-  if (!user) {
-      return res.status(403).end()
+  const user = await authenticate(username, password);
+  
+  if (user === false) {
+      req.login = false;
+  } else {
+      req.login = true;
   }
-  req.user = user; 
+  //req.user = user; 
   next();
 }
 
 // --
+async function authenticate(username, password) {
+  let psw = crypto.createHmac('sha256', secret)
+          .update(password)
+          .digest('hex');            
+
+  let passwordDb = await storage.getPassword(username); 
+  
+
+  if(psw === passwordDb.password){
+
+    return username;
+
+  } else {
+
+    return false; 
+
+  }
+
+}
 
 
-
-app.post('/login', function (req, res){
-  res.status(200).end();
+app.post('/login', authenticator, async function (req, res){
   
   
+
+  if(req.login) {
+
+    res.status(200).end();
+
+  } else {
+    
+    res.status(403).end();
+  }
+  
+
 
 app.post('/frontpage', function (req, res){
+
 
 
 });
