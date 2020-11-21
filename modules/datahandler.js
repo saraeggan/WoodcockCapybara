@@ -10,6 +10,23 @@ class DataHandler {
             }
         };
     }
+    async addItem(data){
+        console.log(data); 
+        const client = new pg.Client(this.credentials);
+        let results = null;
+        try {
+            await client.connect();
+            results = await client.query('insert into "public"."Taskmanager" (id, "listItem", username, "listName", share) values (default, $1, $2, $3, $4)', [data.listItem, data.username, data.listName, data.share]);
+            //results = results.rows[0].message;
+            return results;  
+            client.end();
+        } catch (err) {
+            client.end();
+            console.log(err);
+            results = err;
+        }    
+    }
+
 
     async getPassword(username) {
         const client = new pg.Client(this.credentials);

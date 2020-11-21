@@ -114,7 +114,9 @@ app.post("/addItem", async function (req, res){
 
     let payload = JSON.parse(getPayload(token));
     req.body.username = payload.username;
-    console.log(req.body);
+    //console.log(req.body);
+    let result = await storage.addItem(req.body); 
+    console.log(result); 
 
     
   }else{
