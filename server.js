@@ -10,6 +10,7 @@ const app = express();
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+
 // --
 
 const authenticator = (req, res, next) => {
@@ -36,6 +37,10 @@ app.post('/login', function (req, res){
   res.status(200).end();
   
   
+
+app.post('/frontpage', function (req, res){
+
+
 });
 
 
