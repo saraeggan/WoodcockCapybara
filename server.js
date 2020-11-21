@@ -1,24 +1,69 @@
 
 const express = require('express');
 const bodyParser = require('body-parser');
+const storage = require('./modules/datahandler');
+const crypto = require('crypto');
+const secret = process.env.hashSecret || require('./localenv').hashSecret;
+
 const app = express(); 
-
-const user = require('./modules/user');
-
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
 
+
+// --
+
+const authenticator = (req, res, next) => {
+  if (!req.headers.authorization || req.headers.authorization.indexOf('Basic') === -1) {
+      return res.append("WWW-Authenticate", 'Basic realm="User Visible Realm", charset="UTF-8"').status(401).end()
+  }
+
+  const credentials = req.headers.authorization.split(' ')[1]; 
+  const [username, password] = Buffer.from(credentials, 'base64').toString('UTF-8').split(":");
+
+  const user = authenticate(username, password)
+  if (!user) {
+      return res.status(403).end()
+  }
+  req.user = user; 
+  next();
+}
+
+// --
+
+
+
+app.post('/login', function (req, res){
+  res.status(200).end();
+  
+  
+
 app.post('/frontpage', function (req, res){
+
 
 });
 
 
 app.post('/user', async function (req, res) {
+
+  let user = req.body.username;
+  let psw = req.body.password; 
+  psw = crypto.createHmac('sha256', secret)
+                        .update(psw)
+                        .digest('hex');                
+  let result = await storage.insertUser(user, psw); 
+  console.log(result); 
+  if (result){
+    res.status(200).json("success!").end(); 
+  }else {
+    res.status(200).json("failed").end(); 
+  }
+
+
     
-    const newuser = new user(req.body.username, req.body.password);
-    await newuser.create();
-    res.status(200).json(newuser).end();
+    //const newuser = new user(req.body.username, req.body.password);
+    //await newuser.create();
+    //res.status(200).json(newuser).end();
     //console.log(req.body);
 
 });
