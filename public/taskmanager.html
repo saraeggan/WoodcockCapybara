@@ -9,10 +9,13 @@
 <body>
     
    <div class="container">
+
+        Title: <input id="inpTitle" type="text" /> <br> <br>
        <input id="inpTask" type="text" />
        <button id="btnAddTask">Add task</button>
+       Share: <input id="share" type="checkbox"/>
        <div class="taskManager" id="taskContainer">
-
+       
 
        </div>
    </div> 
@@ -22,9 +25,11 @@
     let inpTask = document.getElementById('inpTask');
     let btnAddTask = document.getElementById('btnAddTask');
     let taskContainer = document.getElementById('taskContainer'); 
-     
+    let inpTitle = document.getElementById('inpTitle');
+    let shareBox = document.getElementById('share');
+    let deleteButton = null;
 
-    btnAddTask.addEventListener('click', function(evt) { 
+    btnAddTask.addEventListener('click', async function(evt) { 
         let taskListItem = document.createElement("li"); 
         taskListItem.innerHTML = inpTask.value;
         
@@ -37,13 +42,42 @@
         }
 
         //Lage en søppelknapp
-        let deleteButton = document.createElement("button");
+        deleteButton = document.createElement("button");
         deleteButton.innerHTML = "Delete";
         deleteButton.classList.add("dltBtn");
         taskListItem.appendChild(deleteButton);
 
-        //Fjerner input verdi
-         inpTask.value = "";
+        
+         const url = "/addItem";
+
+         let share = 0;
+
+         if(shareBox.checked){
+             share = 1;
+         }
+
+         const body = {
+             listName: inpTitle.value,
+             listItem: inpTask.value,
+             share: share    
+         };
+
+         let credentials = "Bearer " + sessionStorage.getItem("token");
+         
+         const headers = {
+            "content-type":"application/json",
+            "authorization": credentials
+         }
+
+         const cfg = {
+             method: "POST",
+             body: JSON.stringify(body),
+             headers: headers
+         }
+
+         let response = await fetch(url, cfg);
+         console.log(response);
+
 
 
          taskListItem.addEventListener('click', function(evt){
@@ -60,7 +94,13 @@
 
         deleteButton.addEventListener('click', function(evt) {
         taskContainer.removeChild(taskListItem);
+
+
     });
+
+
+        //Fjerner input verdi
+        inpTask.value = "";
 
     });
 

@@ -3,6 +3,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const storage = require('./modules/datahandler');
 const crypto = require('crypto');
+const {generateToken, checkToken, getPayload} = require('./modules/token'); 
 const secret = process.env.hashSecret || require('./localenv').hashSecret;
 
 const app = express(); 
@@ -26,6 +27,7 @@ const authenticator = async (req, res, next) => {
       req.login = false;
   } else {
       req.login = true;
+      req.username = username; 
   }
   //req.user = user; 
   next();
@@ -57,11 +59,12 @@ app.post('/login', authenticator, async function (req, res){
   
   
   if(req.login) {
-
-    res.status(200).end();
+    let token = generateToken({username: req.username});
+     
+    res.status(200).json(token).end();
 
   } else {
-    
+
     res.status(403).end();
   }
   
@@ -93,7 +96,25 @@ app.post('/user', async function (req, res) {
 });
 
 
+app.post("/addItem", async function (req, res){
 
+  const token = req.headers.authorization.split(' ')[1]; 
+
+  let access = checkToken(token);
+
+  if(access){
+
+    let payload = JSON.parse(getPayload(token));
+    req.body.username = payload.username;
+    console.log(req.body);
+
+    
+  }else{
+    console.log("denied");
+  }
+
+
+});
 
 
 const PORT = process.env.PORT || 8080; 
