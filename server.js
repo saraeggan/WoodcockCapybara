@@ -22,18 +22,41 @@ const authenticator = (req, res, next) => {
 
   const user = authenticate(username, password)
   if (!user) {
-      return res.status(403).end()
+      return res.status(403).end();
+  } else {
+    
   }
-  req.user = user; 
+  //req.user = user; 
   next();
 }
 
 // --
+async function authenticate(username, password) {
+  let psw = crypto.createHmac('sha256', secret)
+          .update(password)
+          .digest('hex');            
+
+  let passwordDb = await storage.getPassword(username); 
+  console.log(passwordDb.password); 
+
+  if(psw === passwordDb.password){
+
+    return username;
+
+  } else {
+
+    return false; 
+
+  }
+
+}
 
 
-
-app.post('/login', function (req, res){
-  res.status(200).end();
+app.post('/login', authenticator, async function (req, res){
+  
+  if(req.user){
+    res.status(200).end();
+  }
   
   
 });

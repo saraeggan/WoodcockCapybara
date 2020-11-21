@@ -16,7 +16,7 @@
     <label for ="password">Password: </label>
     <input type="password" id="pswLogin" minlength="8">
     
-    <button id = "btnLogin" type = "submit">LogIn</button>
+    <button id = "btnLogin">LogIn</button>
 
     <p id = "outtext"></p>
 
@@ -32,7 +32,7 @@
 
     let credentials = null;
 
-    btnLogin.addEventListener('click', function (evt) {
+    btnLogin.addEventListener('click', async function (evt) {
 
      let username = userLogin.value
      let password = pswLogin.value
@@ -49,12 +49,8 @@
     }
 
 
-        fetch("/login", cfg).then(response => {
-
-        console.log(response.status);
-         
-        });
-
+    let response = await fetch("/login", cfg); 
+    console.log(response.status);
 
 
 }); 

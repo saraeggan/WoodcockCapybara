@@ -11,6 +11,22 @@ class DataHandler {
         };
     }
 
+    async getPassword(username) {
+        const client = new pg.Client(this.credentials);
+        let results = null;
+        try {
+            await client.connect();
+            results = await client.query('select password from "public"."User" where username = $1;', [username]);
+            //results = results.rows[0].message;
+            return results.rows[0];  
+            client.end();
+        } catch (err) {
+            client.end();
+            console.log(err);
+            results = err;
+        } 
+    }
+
     async checkUser(username) {
         const client = new pg.Client(this.credentials);
         let results = null;
