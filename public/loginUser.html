@@ -11,10 +11,10 @@
 
 
     <label for ="username">Username: </label>
-    <input type="text" id="userLogin" minlength="8">
+    <input type="text" id="userLogin">
     
     <label for ="password">Password: </label>
-    <input type="password" id="pswLogin" minlength="8">
+    <input type="password" id="pswLogin">
     
     <button id = "btnLogin">LogIn</button>
 
@@ -29,6 +29,7 @@
     let userLogin = document.getElementById("userLogin");
     let pswLogin = document.getElementById("pswLogin");
     let btnLogin = document.getElementById("btnLogin");
+    let outtext = document.getElementById("outtext");
 
     let credentials = null;
 
@@ -51,6 +52,12 @@
 
     let response = await fetch("/login", cfg); 
     console.log(response.status);
+
+    if(response.status === 200){
+        location.href = "taskmanager.html";
+    } else {
+        outtext.innerHTML = "You must try again!";
+    }
 
 
 }); 
