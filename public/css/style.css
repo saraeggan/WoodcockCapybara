@@ -1,0 +1,40 @@
+
+h1{
+    color: black;
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+p{
+    text-align: center;
+    font-family: Arial, sans-serif;
+}
+
+
+.container{
+   
+    font-family: Arial, sans-serif;
+    text-align: center;
+}
+
+.signUp{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 10px;
+}
+
+.createDivUser{
+    font-family: Arial, sans-serif;
+    text-align: center;
+    padding: 10px;
+}
+
+#outtext{
+    color: red;
+    font-weight: bold;
+    font-size: large;
+}
+
+body{
+    background-color: lightgoldenrodyellow;
+}
