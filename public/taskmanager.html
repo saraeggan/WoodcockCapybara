@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="./css/style.css">
     <title>Taskmanager</title>
 </head>
 <h1> Taskmanager</h1>
@@ -33,7 +34,7 @@
         let taskListItem = document.createElement("li"); 
         taskListItem.innerHTML = inpTask.value;
         
-
+        
         //ikke lage liste element viss det ikke er tekst i input
         if(inpTask.value === ""){
             alert("You must write something")
@@ -41,7 +42,7 @@
         taskContainer.appendChild(taskListItem);
         }
 
-        //Lage en søppelknapp
+        //Lage en deletbutton
         deleteButton = document.createElement("button");
         deleteButton.innerHTML = "Delete";
         deleteButton.classList.add("dltBtn");
@@ -94,6 +95,8 @@
 
         deleteButton.addEventListener('click', function(evt) {
         taskContainer.removeChild(taskListItem);
+
+        const url = "/deleteItem";
 
 
     });
