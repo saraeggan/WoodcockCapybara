@@ -42,6 +42,19 @@
         taskContainer.appendChild(taskListItem);
         }
 
+        taskListItem.addEventListener('click', function(evt){
+             taskListItem.style.textDecoration = "line-through";
+             
+             
+         });
+
+        
+         taskListItem.addEventListener('dblclick', function(evt){
+             taskListItem.style.textDecoration = "none";
+         
+            });
+
+
         //Lage en deletbutton
         deleteButton = document.createElement("button");
         deleteButton.innerHTML = "Delete";
@@ -63,6 +76,20 @@
              share: share    
          };
 
+         //eventlistner for remove button
+
+        deleteButton.addEventListener('click', function(evt) {
+        taskContainer.removeChild(taskListItem);
+
+        const url = "/deleteItem";
+
+
+        });
+
+        //Fjerner input verdi
+        inpTask.value = "";
+        
+
          let credentials = "Bearer " + sessionStorage.getItem("token");
          
          const headers = {
@@ -79,37 +106,8 @@
          let response = await fetch(url, cfg);
          console.log(response);
 
-
-
-         taskListItem.addEventListener('click', function(evt){
-             taskListItem.style.textDecoration = "line-through";
-             
-             
-         });
-         taskListItem.addEventListener('dblclick', function(evt){
-             taskListItem.style.textDecoration = "none";
-         
-            });
-
-         //eventlistner for remove button
-
-        deleteButton.addEventListener('click', function(evt) {
-        taskContainer.removeChild(taskListItem);
-
-        const url = "/deleteItem";
-
-
+    
     });
-
-
-        //Fjerner input verdi
-        inpTask.value = "";
-
-    });
-
-
-     
-
 
 </script>
 </body>
