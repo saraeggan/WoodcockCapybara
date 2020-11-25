@@ -1,8 +1,24 @@
 
+body{
+    background-color: #f4f4f4;
+}
 h1{
     color: black;
     font-family: Arial, sans-serif;
     text-align: center;
+    font-size: 25px;
+    text-transform: uppercase;
+    margin-top: 40px; 
+    margin-bottom: 40px; 
+}
+h2{
+    color: black;
+    font-family: Arial, sans-serif;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+   
+    
 }
 
 p{
@@ -12,9 +28,19 @@ p{
 
 
 .container{
-   
+    width: 100%; 
     font-family: Arial, sans-serif;
-    text-align: center;
+    text-align: left; 
+    margin-left: 50px;   
+}
+
+.dltBtn{
+    margin: 10px; 
+}
+
+li{
+    list-style-type: square;
+    
 }
 
 .signUp{
@@ -35,6 +61,3 @@ p{
     font-size: large;
 }
 
-body{
-    background-color: lightgoldenrodyellow;
-}
