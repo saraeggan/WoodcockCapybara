@@ -55,10 +55,7 @@
 
     let response = await fetch("/login", cfg); 
     console.log(response);
-
-    console.log("1"); 
     let token = await response.json();
-    console.log("2"); 
     if(response.status === 200){ 
         console.log(token); 
         sessionStorage.setItem("token", token); 
