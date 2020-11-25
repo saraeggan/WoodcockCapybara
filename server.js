@@ -126,6 +126,28 @@ app.post("/addItem", async function (req, res){
 
 });
 
+app.delete("/deleteItem", async function (req, res){
+
+  const token = req.headers.authorization.split(' ')[1]; 
+
+  let access = checkToken(token);
+
+  if(access){
+
+    let payload = JSON.parse(getPayload(token));
+    req.body.username = payload.username;
+    //console.log(req.body);
+    let result = await storage.deleteItem(req.body); 
+    console.log(result); 
+
+    
+  }else{
+    console.log("denied");
+  }
+
+
+});
+
 
 const PORT = process.env.PORT || 8080; 
 

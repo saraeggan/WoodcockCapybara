@@ -27,6 +27,23 @@ class DataHandler {
         }    
     }
 
+    async deleteItem(data){
+        console.log(data); 
+        const client = new pg.Client(this.credentials);
+        let results = null;
+        try {
+            await client.connect();
+            results = await client.query('delete from "public"."Taskmanager" where id = 62');
+            //results = results.rows[0].message;
+            return results;  
+            client.end();
+        } catch (err) {
+            client.end();
+            console.log(err);
+            results = err;
+        }    
+    }
+
 
     async getPassword(username) {
         const client = new pg.Client(this.credentials);
@@ -73,7 +90,7 @@ class DataHandler {
         let results = null;
         try {
             await client.connect();
-            results = await client.query('INSERT INTO "public"."User"("username", "password") VALUES($1, $2) RETURNING *;', [username, password]);
+            results = await client.query('INSERT INTO "public"."User" ("username", "password") VALUES($1, $2) RETURNING *;', [username, password]);
             //results = results.rows[0].message;
             client.end();
         } catch (err) {

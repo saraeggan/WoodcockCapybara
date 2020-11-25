@@ -78,16 +78,42 @@
 
          //eventlistner for remove button
 
-        deleteButton.addEventListener('click', function(evt) {
-        taskContainer.removeChild(taskListItem);
+        deleteButton.addEventListener('click', async function(evt) {
+            taskContainer.removeChild(taskListItem);
 
         const url = "/deleteItem";
+
+        const body = {
+             listName: inpTitle.value,
+             listItem: inpTask.value,
+             share: share    
+         };
+
+         let credentials = "Bearer " + sessionStorage.getItem("token");
+
+         const headers = {
+            "content-type":"application/json",
+            "authorization": credentials
+         }
+
+         const cfg = {
+             method: "DELETE",
+             body: JSON.stringify(body),
+             headers: headers
+         }
+
+        let response = await fetch(url, cfg);
+        console.log(response);
+
+        
+        
+
 
 
         });
 
         //Fjerner input verdi
-        inpTask.value = "";
+        //inpTask.value = "";
         
 
          let credentials = "Bearer " + sessionStorage.getItem("token");
