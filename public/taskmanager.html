@@ -11,7 +11,9 @@
     
    <div class="container">
 
-        <h2>List title: </h2><input id="inpTitle" type="text" /> <br> <br>
+        <h2>List title: </h2><input id="inpTitle" type="text" />
+        <button id="dltTaskList">Delete task</button>
+        <br> <br>
        <input id="inpTask" type="text" />
        <button id="btnAddTask">Add task</button>
        Share: <input id="share" type="checkbox"/>
@@ -28,6 +30,7 @@
     let taskContainer = document.getElementById('taskContainer'); 
     let inpTitle = document.getElementById('inpTitle');
     let shareBox = document.getElementById('share');
+    let dtlTaskList = document.getElementById('dltTaskList')
     let deleteButton = null;
 
     btnAddTask.addEventListener('click', async function(evt) { 
