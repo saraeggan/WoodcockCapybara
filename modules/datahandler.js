@@ -16,10 +16,10 @@ class DataHandler {
         let results = null;
         try {
             await client.connect();
-            results = await client.query('insert into "public"."Taskmanager" (id, "listItem", username, "listName", share) values (default, $1, $2, $3, $4)', [data.listItem, data.username, data.listName, data.share]);
-            //results = results.rows[0].message;
-            return results;  
+            results = await client.query('insert into "public"."Taskmanager" (id, "listItem", username, "listName", share) values (default, $1, $2, $3, $4) returning id', [data.listItem, data.username, data.listName, data.share]);
             client.end();
+            return results.rows[0].id;
+            //results = results.rows[0].message;
         } catch (err) {
             client.end();
             console.log(err);
@@ -27,22 +27,40 @@ class DataHandler {
         }    
     }
 
-    async deleteItem(data){
-        console.log(data); 
+    async deleteItem(id){
+        console.log(id); 
         const client = new pg.Client(this.credentials);
         let results = null;
         try {
             await client.connect();
-            results = await client.query('delete from "public"."Taskmanager" where id = 62');
+            results = await client.query('delete from "public"."Taskmanager" where id=$1', [id]);
             //results = results.rows[0].message;
-            return results;  
             client.end();
+            return results;  
         } catch (err) {
             client.end();
             console.log(err);
             results = err;
         }    
     }
+
+    async viewMyLists(username){
+        console.log(username); 
+        const client = new pg.Client(this.credentials);
+        let results = null;
+        try {
+            await client.connect();
+            results = await client.query('select * from "public"."Taskmanager" where username=$1', [username]);
+            //results = results.rows[0].message;
+            client.end();
+            return results.rows;  
+        } catch (err) {
+            client.end();
+            console.log(err);
+            results = err;
+        }    
+    }
+    
 
 
     async getPassword(username) {

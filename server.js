@@ -116,6 +116,7 @@ app.post("/addItem", async function (req, res){
     req.body.username = payload.username;
     //console.log(req.body);
     let result = await storage.addItem(req.body); 
+    res.status(200).json(result).end();
     console.log(result); 
 
     
@@ -137,7 +138,13 @@ app.delete("/deleteItem", async function (req, res){
     let payload = JSON.parse(getPayload(token));
     req.body.username = payload.username;
     //console.log(req.body);
-    let result = await storage.deleteItem(req.body); 
+    let result = await storage.deleteItem(req.body.id); 
+    if (result){
+      res.status(200).end();
+    }else{
+      res.status(500).end();
+    }
+    
     console.log(result); 
 
     
@@ -147,6 +154,26 @@ app.delete("/deleteItem", async function (req, res){
 
 
 });
+
+app.get("/myLists", async function(req,res){
+  const token = req.headers.authorization.split(' ')[1]; 
+
+  let access = checkToken(token);
+
+  if(access){
+
+    let payload = JSON.parse(getPayload(token));
+    let username = payload.username;
+    //console.log(req.body);
+    let result = await storage.viewMyLists(username); 
+    res.status(200).json(result).end();
+    console.log(result); 
+
+    
+  }else{
+    console.log("denied");
+  }
+})
 
 
 const PORT = process.env.PORT || 8080; 
