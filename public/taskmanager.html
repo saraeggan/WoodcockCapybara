@@ -15,7 +15,6 @@
 
         <h2>List title: </h2><input id="inpTitle" type="text" />
         <button id="dltTaskList">Delete task</button>
-        <button id="viewMyList">View my Lists</button>
         <br> <br>
         <input id="inpTask" type="text" />
         <button id="btnAddTask">Add task</button>
@@ -31,13 +30,113 @@
 
     <script>
 
+        let myList = document.getElementById('Mylists');
+
+        async function viewMyLists() {
+            const url = "/myLists";
+
+            let credentials = "Bearer " + sessionStorage.getItem("token");
+
+            const headers = {
+                "content-type": "application/json",
+                "authorization": credentials
+            }
+
+            const cfg = {
+                method: "GET",
+                headers: headers
+            }
+
+            let response = await fetch(url, cfg);
+            let data = await response.json();
+            console.log(data);
+
+            //Lage liste med navn
+
+            let nameList = [];
+
+            for (let item of data) {
+                if (!nameList.includes(item.listName)) {
+                    nameList.push(item.listName);
+                }
+
+            }
+            for (let i = 0; i < nameList.length; i++) {
+                let divForList = document.createElement("div");
+                divForList.classList.add("divForList");
+                myList.appendChild(divForList);
+                divForList.innerHTML =
+                    `<h3 class="ListName">${nameList[i]}</h3>`;
+                for (let item of data) {
+                    if (item.listName === nameList[i]) {
+                        let babyname = document.createElement("div");
+                        babyname.classList.add("babyname");
+                        divForList.appendChild(babyname);
+                        babyname.innerHTML = item.listItem;
+                        //Lage en deletbutton
+                        deleteButton = document.createElement("button");
+                        deleteButton.innerHTML = "Delete";
+                        deleteButton.classList.add("dltBtn");
+                        babyname.appendChild(deleteButton);
+
+                        //eventlistner for remove button
+
+                        deleteButton.addEventListener('click', async function (evt) {
+                            divForList.removeChild(babyname);
+
+                            const url = "/deleteItem";
+
+                            const body = {
+                                listName: item.listName,
+                                listItem: item.listItem,
+                                share: item.share,
+                                id: item.id
+                            };
+
+                            let credentials = "Bearer " + sessionStorage.getItem("token");
+
+                            const headers = {
+                                "content-type": "application/json",
+                                "authorization": credentials
+                            }
+
+                            const cfg = {
+                                method: "DELETE",
+                                body: JSON.stringify(body),
+                                headers: headers
+                            }
+
+                            let response = await fetch(url, cfg);
+
+                            console.log(response);
+
+                            myList.innerHTML = "";
+
+                            viewMyLists();
+
+                        });
+
+                    }
+                }
+
+
+            }
+            console.log(nameList);
+
+        }
+
+        viewMyLists();
+
+
+
+        /***********************************************************************************/
+
         let inpTask = document.getElementById('inpTask');
         let btnAddTask = document.getElementById('btnAddTask');
         let taskContainer = document.getElementById('taskContainer');
         let inpTitle = document.getElementById('inpTitle');
         let shareBox = document.getElementById('share');
         let dtlTaskList = document.getElementById('dltTaskList');
-        let viewMyList = document.getElementById('viewMyList')
         let deleteButton = null;
         let items = [];
         let item = {
@@ -45,9 +144,7 @@
             name: null
         };
 
-        viewMyList.addEventListener('click', function (evt) {
-            location.href = "myList.html";
-        })
+      
 
         btnAddTask.addEventListener('click', async function (evt) {
             let taskListItem = document.createElement("li");
@@ -158,6 +255,9 @@
             item.id = id;
             items.push(item);
             console.log(id);
+
+            myList.innerHTML = "";
+            viewMyLists();
 
 
         });
