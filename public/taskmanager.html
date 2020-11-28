@@ -14,8 +14,6 @@
     <div class="container">
 
         <h2>List title: </h2><input id="inpTitle" type="text" />
-        <button id="dltTaskList">Delete task</button>
-        <button id="viewMyList">View my Lists</button>
         <br> <br>
         <input id="inpTask" type="text" />
         <button id="btnAddTask">Add task</button>
@@ -31,13 +29,160 @@
 
     <script>
 
+        //-----------------------------------------------Output lists---------------------------------------------------------------
+
+        let myList = document.getElementById('Mylists');
+
+        async function viewMyLists() {
+
+            const url = "/myLists";
+
+            let credentials = "Bearer " + sessionStorage.getItem("token");
+
+            const headers = {
+                "content-type": "application/json",
+                "authorization": credentials
+            }
+
+            const cfg = {
+                method: "GET",
+                headers: headers
+            }
+
+            let response = await fetch(url, cfg);
+            let data = await response.json();
+
+            let nameList = [];
+
+            for (let item of data) {
+                if (!nameList.includes(item.listName)) {
+                    nameList.push(item.listName);
+                }
+
+            }
+
+            for (let i = 0; i < nameList.length; i++) {
+                let divForList = document.createElement("div");
+                divForList.classList.add("listDiv")
+                myList.appendChild(divForList);
+                divForList.innerHTML = 
+                    `<h3 class="ListName">${nameList[i]}</h3>`;
+
+                dltBtnForList = document.createElement("button");
+                dltBtnForList.innerHTML = "Delete List";
+                dltBtnForList.classList.add("dltBtn");
+                divForList.appendChild(dltBtnForList);
+
+                dltBtnForList.addEventListener('click', async function (evt) {
+
+                    myList.removeChild(divForList);
+
+                    const url = "/deleteList";
+
+                    const body = {
+                        listName: nameList[i]
+                    };
+
+                    let credentials = "Bearer " + sessionStorage.getItem("token");
+
+                    const headers = {
+                        "content-type": "application/json",
+                        "authorization": credentials
+                    }
+
+                    const cfg = {
+                        method: "DELETE",
+                        body: JSON.stringify(body),
+                        headers: headers
+                    }
+                   
+                    let response = await fetch(url, cfg);
+
+                    myList.innerHTML = "";
+
+                    viewMyLists();
+                });
+
+
+
+                for (let item of data) {
+                    if (item.listName === nameList[i]) {
+
+                        let listItemName = document.createElement("div");
+                        listItemName.classList.add("listItemName");
+                        divForList.appendChild(listItemName);
+                        listItemName.innerHTML = item.listItem;
+
+                        listItemName.addEventListener('click', function (evt) {
+                            listItemName.style.textDecoration = "line-through";
+
+
+                        });
+
+                        listItemName.addEventListener('dblclick', function (evt) {
+                            listItemName.style.textDecoration = "none";
+
+                        });
+
+                        deleteButton = document.createElement("button");
+                        deleteButton.innerHTML = "Delete";
+                        deleteButton.classList.add("dltBtn");
+                        listItemName.appendChild(deleteButton);
+
+                        deleteButton.addEventListener('click', async function (evt) {
+                            divForList.removeChild(listItemName);
+
+                            const url = "/deleteItem";
+
+                            const body = {
+                                listName: item.listName,
+                                listItem: item.listItem,
+                                share: item.share,
+                                id: item.id
+                            };
+
+                            let credentials = "Bearer " + sessionStorage.getItem("token");
+
+                            const headers = {
+                                "content-type": "application/json",
+                                "authorization": credentials
+                            }
+
+                            const cfg = {
+                                method: "DELETE",
+                                body: JSON.stringify(body),
+                                headers: headers
+                            }
+
+                            let response = await fetch(url, cfg);
+
+                            myList.innerHTML = "";
+
+                            viewMyLists();
+
+                        });
+
+                    }
+                }
+
+
+            }
+
+
+        }
+
+        viewMyLists();
+
+
+
+        //--------------------------------------------Input lists--------------------------------------------------------
+
         let inpTask = document.getElementById('inpTask');
         let btnAddTask = document.getElementById('btnAddTask');
         let taskContainer = document.getElementById('taskContainer');
         let inpTitle = document.getElementById('inpTitle');
         let shareBox = document.getElementById('share');
         let dtlTaskList = document.getElementById('dltTaskList');
-        let viewMyList = document.getElementById('viewMyList')
         let deleteButton = null;
         let items = [];
         let item = {
@@ -45,9 +190,7 @@
             name: null
         };
 
-        viewMyList.addEventListener('click', function (evt) {
-            location.href = "myList.html";
-        })
+
 
         btnAddTask.addEventListener('click', async function (evt) {
             let taskListItem = document.createElement("li");
@@ -55,32 +198,13 @@
             item.name = inpTask.value;
 
 
-            //ikke lage liste element viss det ikke er tekst i input
+
+            
             if (inpTask.value === "") {
                 alert("You must write something")
             } else {
                 taskContainer.appendChild(taskListItem);
             }
-
-            taskListItem.addEventListener('click', function (evt) {
-                taskListItem.style.textDecoration = "line-through";
-
-
-            });
-
-
-            taskListItem.addEventListener('dblclick', function (evt) {
-                taskListItem.style.textDecoration = "none";
-
-            });
-
-
-            //Lage en deletbutton
-            deleteButton = document.createElement("button");
-            deleteButton.innerHTML = "Delete";
-            deleteButton.classList.add("dltBtn");
-            taskListItem.appendChild(deleteButton);
-
 
             const url = "/addItem";
 
@@ -95,49 +219,6 @@
                 listItem: inpTask.value,
                 share: share
             };
-
-            //eventlistner for remove button
-
-            deleteButton.addEventListener('click', async function (evt) {
-                taskContainer.removeChild(taskListItem);
-
-                const url = "/deleteItem";
-
-                const body = {
-                    listName: inpTitle.value,
-                    listItem: inpTask.value,
-                    share: share,
-                    id: id
-                };
-
-                console.log(id);
-
-                let credentials = "Bearer " + sessionStorage.getItem("token");
-
-                const headers = {
-                    "content-type": "application/json",
-                    "authorization": credentials
-                }
-
-                const cfg = {
-                    method: "DELETE",
-                    body: JSON.stringify(body),
-                    headers: headers
-                }
-
-                let response = await fetch(url, cfg);
-
-                console.log(response);
-
-
-
-
-
-
-            });
-
-            //Fjerner input verdi
-            //inpTask.value = "";
 
 
             let credentials = "Bearer " + sessionStorage.getItem("token");
@@ -154,17 +235,27 @@
             }
 
             let response = await fetch(url, cfg);
+
             let id = await response.json();
-            item.id = id;
-            items.push(item);
-            console.log(id);
+            if (response.status === 200) {
+                item.id = id;
+                items.push(item);
+                myList.innerHTML = "";
+                viewMyLists();
+            } else {
+                alert(id);
+            }
+
+            inpTask.value = "";
+
+
+
 
 
         });
 
-        function getItems() {
 
-        }
+
 
     </script>
 </body>
