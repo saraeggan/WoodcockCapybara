@@ -1,87 +1,80 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
     <title>Create account</title>
 </head>
+
 <body>
 
     <h1>Create account</h1>
 
     <div class="createDivUser">
-    <label for ="username">Username: </label>
-    <input type="text" id="username">
-    
-    <label for ="password">Password: </label>
-    <input type="password" id="password">
-    
-    <button id = "createUser">Create account</button>
+        <label for="username">Username: </label>
+        <input type="text" id="username">
 
-    <p id = "outtext"></p>
+        <label for="password">Password: </label>
+        <input type="password" id="password">
+
+        <button id="createUser">Create account</button>
+
+        <p id="outtext"></p>
     </div>
 
 
 
-<script>
-    
-    const usernameInp = document.getElementById("username");
-    const pswInp = document.getElementById("password");
-    const createUser = document.getElementById("createUser");
-    const outtext = document.getElementById("outtext");
+    <script>
 
-    
-    createUser.addEventListener('click', async function (evt) {
-        outtext.innerHTML=""; 
-
-       // if(usernameInp.value.length < 4 && pswInp.value.length < 8){
-          //  alert("You need at least 8 characters"); 
-            //return
-       // }
+        const usernameInp = document.getElementById("username");
+        const pswInp = document.getElementById("password");
+        const createUser = document.getElementById("createUser");
+        const outtext = document.getElementById("outtext");
 
 
-        let body = {
-            username: usernameInp.value,
-            password: pswInp.value
-        }
+        createUser.addEventListener('click', async function (evt) {
+            outtext.innerHTML = "";
 
-        let cfg = {
-            method: "POST",
-            headers:{
-                "content-type":"application/json"
-            },
-            body: JSON.stringify(body)
-        }
+            if (usernameInp.value.length < 4 && pswInp.value.length < 8) {
+                alert("Username needs at least 4 characters and Password needs at least 8 characters");
+                return
+            }
 
-        
-       /* fetch("/user", cfg).then(response => {
-        
-            return response.json(); 
+            let body = {
+                username: usernameInp.value,
+                password: pswInp.value
+            }
 
+            const headers = {
+                "content-type": "application/json"
+            }
 
-        }).then(data => {
-            console.log(data); 
-        });*/
+            let cfg = {
+                method: "POST",
+                headers: headers,
+                body: JSON.stringify(body)
+            }
 
-        let response = await fetch("/user", cfg); 
-        let data = await response.json(); 
+            let response = await fetch("/user", cfg);
+            let data = await response.json();
 
-        if (data === "success!"){
-            location.href="loginUser.html"; 
-        }else{
-            outtext.innerHTML = "This user already exists"; 
-        }
-        
-
-
-    }); 
+            if (data === "success!") {
+                location.href = "loginUser.html";
+            } else {
+                outtext.innerHTML = "This user already exists";
+            }
 
 
-</script>
+
+        });
 
 
- 
+    </script>
+
+
+
 </body>
-</html>
 
+</html>

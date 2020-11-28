@@ -1,62 +1,66 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="./css/style.css">
     <title>WoodcockCapybara taskmanager</title>
 </head>
+
 <body>
 
     <h1>WELCOME TO WOODCOCKCAPYBARA TASK MANAGER</h1>
 
     <p>
-        Is your life a mess? Do you need structure in your life? <br> 
+        Is your life a mess? Do you need structure in your life? <br>
         WELL then you need WoodcockCapybara task manager! <br>
         It will make your life simply deligthful!
     </p>
 
-<div class="signUp">
-    <label id="login" for="login">LogIn</label>
-    <button id="btnLogin" class="buttonStyle">LogIn</button>
+    <div class="signUp">
+        <label id="login" for="login">LogIn</label>
+        <button id="btnLogin" class="buttonStyle">LogIn</button>
 
-    <label id="signUp" for="createuser">Don't have an account? Sign up here!</label>
-    <button id="btnCreate" class="buttonStyle">Sign up</button>
-</div>
-    
+        <label id="signUp" for="createuser">Don't have an account? Sign up here!</label>
+        <button id="btnCreate" class="buttonStyle">Sign up</button>
+    </div>
+
 
 
     <script>
-        
-        let btnLogin = document.getElementById('btnLogin');
-        let btnCreate = document.getElementById('btnCreate'); 
 
-        btnLogin.addEventListener('click', function (evt){
-            
+        let btnLogin = document.getElementById('btnLogin');
+        let btnCreate = document.getElementById('btnCreate');
+
+        btnLogin.addEventListener('click', function (evt) {
+
             location.href = "loginUser.html";
-            
-    
+
+
         });
-    
-        btnCreate.addEventListener('click', function (evt){
-    
+
+        btnCreate.addEventListener('click', function (evt) {
+
             location.href = "createUser.html";
-    
+
         });
-    
-    
-        let data = {btnCreate, btnLogin};
+
+
+        let data = { btnCreate, btnLogin };
+
+        const headers = {
+            "content-type": "application/json"
+        }
 
         let cfg = {
             method: "POST",
-            headers:{
-                "content-type":"application/json"
-            },
+            headers: headers,
             body: JSON.stringify(data)
         }
 
 
-    
+
 
 
 
@@ -65,6 +69,7 @@
 
 
 
-    
+
 </body>
+
 </html>
