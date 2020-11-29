@@ -11,20 +11,19 @@
 
 <body>
 
-    <div class="container">
+    <div class="containerTaskmanager">
 
-        <h2>List title: </h2><input id="inpTitle" type="text" />
-        <br> <br>
+        <h4>List title: </h4><input id="inpTitle" type="text" /> 
+        <h4>Task: </h4>
         <input id="inpTask" type="text" />
         <button id="btnAddTask">Add task</button>
         Share: <input id="share" type="checkbox" />
         <div class="taskManager" id="taskContainer">
         </div>
         <hr>
-
-        <h1>My lists</h1>
         <div id="Mylists">
         </div>
+        <hr>
     </div>
 
     <script>
@@ -125,7 +124,7 @@
                         });
 
                         deleteButton = document.createElement("button");
-                        deleteButton.innerHTML = "Delete";
+                        deleteButton.innerHTML = "X";
                         deleteButton.classList.add("dltBtn");
                         listItemName.appendChild(deleteButton);
 
