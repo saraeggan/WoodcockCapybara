@@ -58,14 +58,12 @@
 
 
         let response = await fetch("/login", cfg);
-        console.log(response);
         let token = await response.json();
 
         if (response.status === 200) {
-            console.log(token);
             sessionStorage.setItem("token", token);
             location.href = "taskmanager.html";
-        } else {
+        } else if (response.status === 403) {
             outtext.innerHTML = "You must try again!";
         }
 
