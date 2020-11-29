@@ -11,7 +11,6 @@ class DataHandler {
         };
     }
     async addItem(data) {
-        console.log(data);
         const client = new pg.Client(this.credentials);
         let results = null;
         try {
@@ -21,13 +20,11 @@ class DataHandler {
             return results.rows[0].id;
         } catch (err) {
             client.end();
-            console.log(err);
             results = err;
         }
     }
 
     async deleteItem(id) {
-        console.log(id);
         const client = new pg.Client(this.credentials);
         let results = null;
         try {
@@ -37,13 +34,11 @@ class DataHandler {
             return results;
         } catch (err) {
             client.end();
-            console.log(err);
             results = err;
         }
     }
 
     async deleteList(data) {
-        console.log(data);
         const client = new pg.Client(this.credentials);
         let results = null;
         try {
@@ -53,13 +48,11 @@ class DataHandler {
             return results;
         } catch (err) {
             client.end();
-            console.log(err);
             results = err;
         }
     }
 
     async viewMyLists(username) {
-        console.log(username);
         const client = new pg.Client(this.credentials);
         let results = null;
         try {
@@ -69,7 +62,6 @@ class DataHandler {
             return results.rows;
         } catch (err) {
             client.end();
-            console.log(err);
             results = err;
         }
     }
@@ -86,7 +78,6 @@ class DataHandler {
             client.end();
         } catch (err) {
             client.end();
-            console.log(err);
             results = err;
         }
     }
@@ -101,20 +92,16 @@ class DataHandler {
             client.end();
         } catch (err) {
             client.end();
-            console.log(err);
             results = err;
         }
     }
 
     async insertUser(username, password) {
         let userExists = await this.checkUser(username);
-        console.log(userExists);
         if (userExists) {
-            console.log(1);
             return false;
 
         } else {
-            console.log(2);
             const client = new pg.Client(this.credentials);
             let results = null;
             try {
@@ -124,7 +111,6 @@ class DataHandler {
                 client.end();
             } catch (err) {
                 client.end();
-                console.log(err);
                 results = err;
             }
 
