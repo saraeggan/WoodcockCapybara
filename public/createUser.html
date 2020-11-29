@@ -37,9 +37,13 @@
         createUser.addEventListener('click', async function (evt) {
             outtext.innerHTML = "";
 
-            if (usernameInp.value.length < 4 && pswInp.value.length < 8) {
-                alert("Username needs at least 4 characters and Password needs at least 8 characters");
+            if (usernameInp.value.length < 4 ) {
+                 alert("Username needs at least 4 characters");
                 return
+            }else if(pswInp.value.length < 8){
+                alert("Password needs at least 8 characters");
+                return;
+
             }
 
             let body = {

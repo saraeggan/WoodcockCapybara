@@ -4,50 +4,202 @@ body{
 }
 h1{
     color: black;
-    font-family: Arial, sans-serif;
+    font-family: Helvetica, Arial, sans-serif;
+    letter-spacing: 2px;
     text-align: center;
-    font-size: 25px;
+    font-size: 40px;
     text-transform: uppercase;
-    margin-top: 40px; 
+    margin-top: 70px; 
     margin-bottom: 40px; 
+    font-weight: 150;
 }
 h2{
     color: black;
-    font-family: Arial, sans-serif;
+    font-family: Helvetica, sans-serif;
     text-align: left;
-    font-size: 12px;
+    font-size: 23px;
+    text-transform: uppercase; 
+    font-weight: 150;
+    
+}
+h3{
+    color: black;
+    font-family: Helvetica, sans-serif;
+    text-align: left;
+    font-size: 20px;
     text-transform: uppercase;
+    border-bottom: 1px solid #777;
+    border-width: 75%;
+    margin-top: 40px; 
+    font-weight: 150;
    
     
+}h4{
+    color: black;
+    font-family: Helvetica, Arial, sans-serif;
+    text-align: left;
+    font-size: 15px;
+    text-transform: uppercase;
+    font-weight: 150;
+   
+    
+}
+
+hr{
+    color: #777;
+    margin-bottom: 45px; 
 }
 
 p{
     text-align: center;
     font-family: Arial, sans-serif;
+    line-height: 4;
+    font-weight: 150;
 }
 
+label{
+    font-family: Helvetica, sans-serif;
+    font-size: 14px;
+    text-transform: uppercase;
+
+}
+
+.signUp{
+    width: 50%; 
+    font-family: Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: left;
+    line-height: 4; 
+    float: center; 
+    margin: auto;
+
+}
 
 .container{
     width: 100%; 
     font-family: Arial, sans-serif;
+    text-align: center;     
+}
+.containerTaskmanager{
+    width: 75%; 
+    font-family: Arial, sans-serif;
     text-align: left; 
-    margin-left: 50px;   
+    margin-left: 50px;     
 }
 
-.dltBtn{
-    margin: 10px; 
+.buttonStyle{
+    margin: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center; 
+    color: #fff; 
+    padding: 5px;
+    background-color: #333;
+    border: none; 
+    transition-duration: 0.4s;
+    float: center; 
+    border-radius: 3px;
+    
 }
-
-li{
-    list-style-type: square;
+.buttonStyle:hover{
+    background-color:transparent; 
+    color: #333; 
     
 }
 
-.signUp{
+#btnAddTask{
+    margin: 10px;
     font-family: Arial, sans-serif;
-    text-align: center;
-    padding: 10px;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center; 
+    color: #fff; 
+    padding: 5px;
+    background-color: #333;
+    border: none; 
+    transition-duration: 0.4s;
+    float: center; 
+    border-radius: 3px;
 }
+
+#btnAddTask:hover{
+    background-color:transparent; 
+    color: #333; 
+    
+}
+#createUser{
+    margin: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center; 
+    color: #fff; 
+    padding: 5px;
+    background-color: #333;
+    border: none; 
+    transition-duration: 0.4s;
+    float: center; 
+    border-radius: 3px;
+}
+
+#createUser:hover{
+    background-color:transparent; 
+    color: #333; 
+    
+}
+#btnLogin{
+    margin: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center; 
+    color: #fff; 
+    padding: 5px;
+    background-color: #333;
+    border: none; 
+    transition-duration: 0.4s;
+    float: center; 
+    border-radius: 3px;
+}
+
+#btnLogin:hover{
+    background-color:transparent; 
+    color: #333; 
+    
+}
+.dltBtn{
+    margin: 10px;
+    font-family: Arial, sans-serif;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-weight: bold;
+    text-align: center; 
+    color: #777777; 
+    padding: 5px;
+    background-color: transparent;
+    border: none; 
+    transition-duration: 0.4s;
+    float: center; 
+    border-radius: 3px;
+}
+
+.dltBtn:hover{
+   background-color: #333; 
+   color: white; 
+   padding: 5px; 
+}
+
+li{
+    list-style-type: circle;
+    
+}
+
 
 .createDivUser{
     font-family: Arial, sans-serif;
