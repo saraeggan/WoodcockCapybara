@@ -1,4 +1,3 @@
-
 const express = require('express');
 const bodyParser = require('body-parser');
 const storage = require('./modules/datahandler');
@@ -10,8 +9,6 @@ const app = express();
 
 app.use(bodyParser.json());
 app.use(express.static('public'));
-
-
 
 
 const authenticator = async (req, res, next) => {
@@ -64,7 +61,7 @@ app.post('/login', authenticator, async function (req, res) {
 
   } else {
 
-    res.status(403).end();
+    res.status(403).json("Try again").end();
   }
 
 
@@ -81,7 +78,6 @@ app.post('/user', async function (req, res) {
     .digest('hex');
 
   let result = await storage.insertUser(user, psw);
-  console.log(result);
 
   if (result) {
     res.status(200).json("success!").end();
@@ -103,7 +99,6 @@ app.post("/addItem", async function (req, res) {
     req.body.username = payload.username;
     let result = await storage.addItem(req.body);
     res.status(200).json(result).end();
-    console.log(result);
 
 
   } else {
@@ -131,8 +126,6 @@ app.delete("/deleteItem", async function (req, res) {
       res.status(500).end();
     }
 
-    console.log(result);
-
 
   } else {
     console.log("denied");
@@ -152,7 +145,6 @@ app.get("/myLists", async function (req, res) {
     let username = payload.username;
     let result = await storage.viewMyLists(username);
     res.status(200).json(result).end();
-    console.log(result);
 
 
   } else {
@@ -177,8 +169,6 @@ app.delete("/deleteList", async function (req, res) {
     } else {
       res.status(500).end();
     }
-
-    console.log(result);
 
 
   } else {

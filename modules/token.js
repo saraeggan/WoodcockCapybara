@@ -1,12 +1,5 @@
-//https://jwt.io/
 const crypto = require('crypto'); 
 let secret = process.env.tokenSecret || require('../localenv').tokenSecret;
-
-/*let payload = {
-    "sub": "1234567890",
-    "name": "John Doe",
-    "admin": true
-  }*/
 
   function checkToken(token){
       let [header, payload, sign] = token.split("."); 
@@ -58,8 +51,6 @@ let secret = process.env.tokenSecret || require('../localenv').tokenSecret;
       let payload = buff.toString('utf-8');
 
       return payload;
-  }
-
-  //generateToken(payload); 
+  } 
 
   module.exports = {generateToken, checkToken, getPayload}
